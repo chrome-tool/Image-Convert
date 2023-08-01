@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "Image Converter",
+    "version": "1.0",
+    "description": "Convert images",
+    "action": {
+        "default_popup": "asset/html/popup.html",
+        "default_icon": {
+            "16": "asset/icon_16.png",
+            "48": "asset/icon_48.png",
+            "128": "asset/icon_128.png"
+        }
+    }
+}
