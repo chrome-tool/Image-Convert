@@ -4,7 +4,7 @@ English | [日本語](./README_jp.md) | [简体中文](./README_zh.md)
 
 # ✔ About
 
-This is an extension tool for Chrome browser that converts image format and image size.
+This is an extension tool for Chrome browser that converts image type and image size.
 
 - Operation method
 
