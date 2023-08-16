@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Image Converter</title>
+    <link rel="stylesheet" href="./popup.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="box">
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label"> <abbr>*</abbr>File: </label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="has-name">
+                            <label class="file-label">
+                                <input id="imageInput" type="file" class="file-input" accept="image/*">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Choose a file…
+                                    </span>
+                                </span>
+                                <span class="file-name">
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label"> <abbr>*</abbr>File Type: </label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="select is-primary custom-size">
+                            <select id="converFileType" class="custom-size">
+                                <option value="image/jpeg">jpg</option>
+                                <option value="image/jpeg">jpeg</option>
+                                <option value="image/png">png</option>
+                                <option value="image/gif">gif</option>
+                                <option value="image/vnd.microsoft.icon">ico</option>
+                                <option value="image/webp">webp</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Height:</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <input id="height" type="number" class="input is-primary" placeholder="Height">
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Width:</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <input id="width" type="number" class="input is-primary" placeholder="Width">
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Preview:</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="card-image">
+                            <div id="imagePreview" class="image-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button id="convertBtn" class="button is-primary">Convert</button>
+            </div>
+            <div class="feedbackHint">
+                <span>Feedback on</span>
+                <a target="_blank"
+                    href="https://chrome.google.com/webstore/detail/image-converter/fbhfincidgbfkoiohikfnmfocpkbeldh/reviews">
+                    Chrome Store
+                </a>
+            </div>
+            <div id="modal" class="custom-modal">
+                <div class="notification is-danger is-light">
+                    <button class="delete"></button>
+                    <strong id="message"></strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loading" class="loading">
+        <div>Loading...</div>
+    </div>
+    <script src="./popup.js"></script>
+</body>
+
+</html>
