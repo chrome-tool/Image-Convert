@@ -1,0 +1,110 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
+@import "https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css";
+
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 450px;
+}
+
+abbr {
+    color: #ac0303;
+}
+
+.file-label {
+    width: 100% !important;
+}
+
+.file-cta {
+    border-color: #00d1b2 !important;
+    border-right: 0;
+    border-radius:  4px 0 0 4px;
+}
+
+.file-name {
+    width: 100%;
+    border-color: #00d1b2 !important;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.custom-size {
+    width: 100% !important;
+}
+
+.image-preview {
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #00d1b2;
+    border-radius: 5px;
+}
+
+.loading {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(231, 227, 227, 0.5);
+}
+
+.loading>div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.custom-modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(56, 56, 56, 0.8);
+}
+
+.custom-modal>div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+}
+
+.feedbackHint {
+    float: right;
+    font-size: 10px;
+    color: #333;
+    display: flex;
+}
+
+.feedbackHint span {
+    margin-right: 0.5em;
+}
+
+.feedbackHint a {
+    text-decoration: none;
+    color: #0071bc;
+}
+
+.feedbackHint:after {
+    display: inline-block;
+    content: '';
+    background: url(images/bag.min.svg) 50% 50% no-repeat;
+    width: 12px;
+    height: 12px;
+    background-size: contain;
+    vertical-align: bottom;
+    margin-bottom: 8px;
+    margin-left: 5px;
+}

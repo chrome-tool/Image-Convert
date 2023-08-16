@@ -10,18 +10,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // image change.
     imageInput.addEventListener('change', function () {
         const file = imageInput.files[0];
+        const filename = document.querySelector('.file-name');
         // file check
         if (!file) {
             imagePreview.style.backgroundImage = 'none';
+            filename.innerHTML = '';
             return;
         }
 
         if (!file.type.includes('image')) {
-            alert('Please select a PNG image file.');
+            showErrorMsg('Please select a image file.');
             imageInput.value = '';
             imagePreview.style.backgroundImage = 'none';
+            filename.innerHTML = '';
             return;
         }
+
+        filename.innerHTML = file.name;
         // read seleted image
         const reader = new FileReader();
         reader.onload = function (event) {
@@ -37,20 +42,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // file check
         if (!file) {
             hideLoading();
-            alert('Please select a image file.');
+            showErrorMsg('Please select a image file.');
             return;
         }
 
         if (!file.type.includes('image')) {
             hideLoading();
-            alert('Please select a image file.');
+            showErrorMsg('Please select a image file.');
             return;
         }
         // target type check
         const converFileType = select.options[select.selectedIndex];
         if (!converFileType) {
             hideLoading();
-            alert('Please select target file type.');
+            showErrorMsg('Please select target file type.');
             return;
         }
 
@@ -83,25 +88,42 @@ document.addEventListener('DOMContentLoaded', function () {
                 canvas.height = img.height;
                 ctx.drawImage(img, 0, 0);
             }
+            try {
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, converFileType.value, 1));
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${file.name.substring(0, file.name.lastIndexOf('.'))}.${converFileType.label}`;
+                link.click();
+                URL.revokeObjectURL(url);
+            } catch (e) {
+                console.error(e);
+                showErrorMsg('Failed to Convert the image.')
+            } finally {
+                hideLoading();
+            }
 
-            const blob = await new Promise(resolve => canvas.toBlob(resolve, converFileType.value, 1));
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `${file.name.substring(0, file.name.lastIndexOf('.'))}.${converFileType.label}`;
-            link.click();
-            URL.revokeObjectURL(url);
-            hideLoading();
         };
 
-        reader.onerror = function() {
+        reader.onerror = function () {
             hideLoading();
-            alert('Failed to load the image.');
+            showErrorMsg('Failed to load the image.');
         }
         reader.readAsDataURL(file);
     });
+
+    document.querySelector('.delete').addEventListener('click', function () {
+        // modal element
+        hideErrorMsg();
+    }, false)
 });
 
+/**
+ * load image
+ * @param {*} img image object
+ * @param {*} src content
+ * @returns 
+ */
 function loadImage(img, src) {
     return new Promise((resolve, reject) => {
         img.onload = () => resolve(img);
@@ -110,12 +132,40 @@ function loadImage(img, src) {
     });
 }
 
+/**
+ * show loading
+ */
 function showLoading() {
-    const loadingElement = document.getElementById('loading');
-    loadingElement.style.display = 'block';
+    const element = document.getElementById('loading');
+    element.style.display = 'block';
 }
 
+/**
+ * hide loading
+ */
 function hideLoading() {
-    const loadingElement = document.getElementById('loading');
-    loadingElement.style.display = 'none';
+    const element = document.getElementById('loading');
+    element.style.display = 'none';
+}
+
+/**
+ * show message
+ * @param {*} msg message
+ */
+function showErrorMsg(msg) {
+    const elementMsg = document.getElementById('message');
+    elementMsg.innerHTML = msg;
+    const elementContainer = document.getElementById('modal');
+    elementContainer.style.display = 'block';
+}
+
+
+/**
+ * hide message
+ */
+function hideErrorMsg() {
+    const elementMsg = document.getElementById('message');
+    elementMsg.innerHTML = null;
+    const elementContainer = document.getElementById('modal');
+    elementContainer.style.display = 'none';
 }
