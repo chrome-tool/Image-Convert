@@ -1,17 +1,25 @@
 {
     "manifest_version": 3,
-    "name": "Image Converter",
-    "version": "1.0.1",
-    "description": "The tool to convert between different image formats (JPEG, PNG, GIF, etc.) and change image size.",
+    "name": "__MSG_name__",
+    "version": "1.0.3",
+    "default_locale": "en",
+    "description": "__MSG_description__",
+    "author": "Seiri",
     "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "128": "images/icon_128.png"
-        }
+        "default_icon": "assets/static/icons/icon128.png"
+    },
+    "background": {
+        "service_worker": "assets/js/background.js"
+    },
+    "permissions": [
+        "sidePanel"
+    ],
+    "side_panel": {
+        "default_path": "index.html"
     },
     "icons": {
-        "128": "images/icon_128.png",
-        "16": "images/icon_16.png",
-        "48": "images/icon_48.png"
-     }
+        "16": "assets/static/icons/icon16.png",
+        "48": "assets/static/icons/icon48.png",
+        "128": "assets/static/icons/icon128.png"
+    }
 }

@@ -1,0 +1,8 @@
+{
+   "name": {
+      "message": "이미지 변환기"
+   },
+   "description": {
+      "message": "이미지 확장자(JPEG, PNG, GIF 등) 사이에서 이미지 크기를 변환하고 변경하는 데 사용되는 도구입니다."
+   }
+}

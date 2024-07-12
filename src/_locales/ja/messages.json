@@ -1,0 +1,8 @@
+{
+   "name": {
+      "message": "画像変換器"
+   },
+   "description": {
+      "message": "画像拡張子（JPEG、PNG、GIFなど）間で変換および画像サイズを変更するためのツール。"
+   }
+}

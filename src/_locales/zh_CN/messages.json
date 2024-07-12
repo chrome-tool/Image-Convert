@@ -1,0 +1,8 @@
+{
+   "name": {
+      "message": "图像转换器"
+   },
+   "description": {
+      "message": "用于在不同图像格式（JPEG、PNG、GIF等）之间转换并且更改图像大小的工具。"
+   }
+}
