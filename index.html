@@ -1,129 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image Converter</title>
     <link rel="stylesheet" href="./assets/css/index.css" />
   </head>
-
   <body>
-    <div class="card-container">
-      <div class="card">
-        <div class="box">
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <label class="label"> <abbr>*</abbr>File: </label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="has-name">
-                  <label class="file-label">
-                    <input
-                      id="imageInput"
-                      type="file"
-                      class="file-input"
-                      accept="image/*"
-                    />
-                    <span class="file-cta">
-                      <span class="file-icon">
-                        <i class="fas fa-upload"></i>
-                      </span>
-                      <span class="file-label"> Choose a file… </span>
-                    </span>
-                    <span class="file-name"> </span>
-                  </label>
-                </div>
-              </div>
+    <main class="app-shell" aria-labelledby="app-title">
+      <header class="app-header">
+        <h1 id="app-title">Image Converter</h1>
+        <p>Convert and resize images directly in your browser.</p>
+      </header>
+
+      <section class="panel" aria-label="Upload">
+        <label class="input-label" for="imageInput">Source images</label>
+        <input id="imageInput" type="file" class="native-file-input" accept="image/*" multiple />
+
+        <div id="dropzone" class="dropzone" role="button" tabindex="0" aria-describedby="dropzoneHelp">
+          <div class="dropzone-title">Drop images here</div>
+          <div id="dropzoneHelp" class="dropzone-subtitle">or click to choose files</div>
+          <div id="fileName" class="file-name">No files selected</div>
+        </div>
+
+        <div class="file-list-wrap">
+          <div class="file-list-title">Selected files</div>
+          <ul id="fileList" class="file-list"></ul>
+        </div>
+      </section>
+
+      <section class="panel controls" aria-label="Convert options">
+        <div class="control-grid">
+          <div class="control-item">
+            <label class="input-label" for="convertFileType">Target format</label>
+            <select id="convertFileType" class="control-input"></select>
+          </div>
+
+          <div class="control-item">
+            <label class="input-label" for="quality">Quality</label>
+            <div class="quality-wrap">
+              <input id="quality" type="range" class="quality-slider" min="10" max="100" value="92" />
+              <output id="qualityValue" for="quality" class="quality-value">92%</output>
             </div>
           </div>
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <label class="label"> <abbr>*</abbr>File Type: </label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="select is-primary custom-size">
-                  <select id="converFileType" class="custom-size">
-                    <option value="image/jpeg">jpg</option>
-                    <option value="image/jpeg">jpeg</option>
-                    <option value="image/png">png</option>
-                    <option value="image/gif">gif</option>
-                    <option value="image/vnd.microsoft.icon">ico</option>
-                    <option value="image/webp">webp</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+
+          <div class="control-item">
+            <label class="input-label" for="width">Width (px)</label>
+            <input id="width" type="number" min="1" step="1" class="control-input" placeholder="Auto" />
           </div>
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <label class="label">Width:</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <input
-                  id="width"
-                  type="number"
-                  class="input is-primary"
-                  placeholder="Width"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <label class="label">Height:</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <input
-                  id="height"
-                  type="number"
-                  class="input is-primary"
-                  placeholder="Height"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="field is-horizontal">
-            <div class="field-label">
-              <label class="label">Preview:</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="card-image">
-                  <div id="imagePreview" class="image-preview"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="field is-horizontal button-container">
-            <div class="field-label">
-              <button id="convertBtn" class="button is-primary">Convert</button>
-            </div>
-            <div class="field-body"></div>
-          </div>
-          <div class="feedbackHint">
-            <span>Feedback on</span>
-            <a
-              target="_blank"
-              href="https://chromewebstore.google.com/detail/image-converter/fdigobpfkndelcjmihianfobjpnkkghc"
-            >
-              Chrome Store
-            </a>
-          </div>
-          <div id="modal" class="custom-modal">
-            <div class="notification is-danger is-light">
-              <button class="delete"></button>
-              <strong id="message"></strong>
-            </div>
+
+          <div class="control-item">
+            <label class="input-label" for="height">Height (px)</label>
+            <input id="height" type="number" min="1" step="1" class="control-input" placeholder="Auto" />
           </div>
         </div>
-      </div>
+
+        <label class="checkbox-row" for="keepAspect">
+          <input id="keepAspect" type="checkbox" checked />
+          <span>Keep original aspect ratio</span>
+        </label>
+      </section>
+
+      <section class="panel" aria-label="Preview">
+        <div class="preview-header">
+          <span>Preview (first file)</span>
+          <span id="imageMeta" class="meta-text">No image loaded</span>
+        </div>
+        <div id="imagePreview" class="image-preview" role="img" aria-label="Selected image preview"></div>
+      </section>
+
+      <section class="actions" aria-label="Actions">
+        <button id="convertBtn" class="convert-btn" type="button">Convert and Download</button>
+        <p id="statusMessage" class="status-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <footer class="feedback-hint">
+        <span>Feedback on</span>
+        <a target="_blank" rel="noreferrer" href="https://chromewebstore.google.com/detail/image-converter/fdigobpfkndelcjmihianfobjpnkkghc">Chrome Web Store</a>
+      </footer>
+    </main>
+
+    <div id="loading" class="loading" aria-hidden="true">
+      <div id="loadingText">Converting...</div>
     </div>
-    <div id="loading" class="loading">
-      <div>Loading...</div>
-    </div>
+
     <script src="./assets/js/index.js"></script>
   </body>
 </html>
